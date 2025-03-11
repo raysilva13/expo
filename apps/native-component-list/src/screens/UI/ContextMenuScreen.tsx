@@ -28,6 +28,15 @@ export default function ContextMenuScreen() {
         onPress={() => console.log('Pressed1')}>
         Hello
       </Button>
+      <Picker
+        options={['$', '$$']}
+        selectedIndex={selectedIndex}
+        onOptionSelected={({ nativeEvent: { index } }) => {
+          setSelectedIndex(index);
+        }}
+        label="Cost"
+        variant="palette"
+      />
       <Button
         variant="bordered"
         systemImage={{ ios: 'heart' }}
@@ -69,7 +78,7 @@ export default function ContextMenuScreen() {
 
   return (
     <View>
-      <Section title="Single-Press Context Menu" row>
+      <Section title={'Single-Press Context Menu' + selectedIndex} row>
         <ContextMenu Items={MenuItems} style={{ width: 150, height: 50 }}>
           <Button variant="bordered" style={{ width: 150, height: 50 }}>
             Show Menu
