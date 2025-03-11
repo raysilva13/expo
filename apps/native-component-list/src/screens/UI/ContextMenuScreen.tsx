@@ -78,7 +78,7 @@ export default function ContextMenuScreen() {
 
   return (
     <View>
-      <Section title={'Single-Press Context Menu' + selectedIndex} row>
+      <Section title="Single-Press Context Menu" row>
         <ContextMenu Items={MenuItems} style={{ width: 150, height: 50 }}>
           <Button variant="bordered" style={{ width: 150, height: 50 }}>
             Show Menu
