@@ -379,7 +379,6 @@ export const eas = [
       makePage('eas/index.mdx'),
       makePage('eas/json.mdx'),
       makePage('eas/environment-variables.mdx'),
-      makePage('eas/using-environment-variables.mdx'),
     ],
     {
       expanded: true,
@@ -467,9 +466,9 @@ export const eas = [
   ]),
   makeSection('EAS Submit', [
     makePage('submit/introduction.mdx'),
-    makePage('submit/eas-json.mdx'),
     makePage('submit/android.mdx'),
     makePage('submit/ios.mdx'),
+    makePage('submit/eas-json.mdx'),
   ]),
   makeSection('EAS Update', [
     makePage('eas-update/introduction.mdx'),
@@ -722,7 +721,7 @@ function makePage(file) {
 
   const result = {
     // TODO(cedric): refactor name into title
-    name: data.title,
+    name: data.sidebar_title ?? data.title,
     // TODO(cedric): refactor href into url
     href: url,
     isNew: data.isNew ?? undefined,
