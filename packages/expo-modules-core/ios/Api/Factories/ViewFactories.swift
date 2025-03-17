@@ -13,13 +13,13 @@ public func View<ViewType: UIView>(
 /**
  Creates a view definition describing the native SwiftUI view exported to React.
  */
-public func View<Props: ExpoSwiftUI.ViewProps, ViewType: ExpoSwiftUI.View<Props>>(
+public func View<Props: ExpoSwiftUI.ViewProps, ViewType: ExpoSwiftUI.View>(
   _ viewType: ViewType.Type
 ) -> ExpoSwiftUI.ViewDefinition<Props, ViewType> {
   return ExpoSwiftUI.ViewDefinition(ViewType.self)
 }
 
-public func View<Props: ExpoSwiftUI.ViewProps, ViewType: ExpoSwiftUI.View<Props>>(
+public func View<Props: ExpoSwiftUI.ViewProps, ViewType: ExpoSwiftUI.View>(
   _ viewType: ViewType.Type,
   @ExpoSwiftUI.ViewDefinitionBuilder<ViewType> _ elements: @escaping () -> [AnyViewDefinitionElement]
 ) -> ExpoSwiftUI.ViewDefinition<Props, ViewType> {

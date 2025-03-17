@@ -94,7 +94,7 @@ open class ExpoFabricView: ExpoFabricViewObjC, AnyExpoView {
     guard let viewDefinition else {
       return
     }
-    viewDefinition.callLifecycleMethods(withType: .didUpdateProps, forView: self)
+    viewDefinition.callLifecycleMethods(withType: .didUpdateProps, forView: AppleView.from(self)!)
   }
 
   /**
@@ -177,8 +177,16 @@ open class ExpoFabricView: ExpoFabricViewObjC, AnyExpoView {
       guard let view = moduleHolder.definition.views[viewName]?.createView(appContext: appContext) else {
         fatalError("Cannot create a view '\(viewName)' from module '\(moduleName)'")
       }
-      _ = Unmanaged.passRetained(view) // retain the view given this is an initializer
-      return view
+      switch view {
+      case .uikit(let view):
+        _ = Unmanaged.passRetained(view) // retain the view given this is an initializer
+        return view
+      case .swiftui(let view):
+        if let viewObject = view as AnyObject? {
+          _ = Unmanaged.passRetained(viewObject) // retain the view given this is an initializer
+        }
+        return view
+      }
     }
     let newBlockImp: IMP = imp_implementationWithBlock(newBlock)
     class_replaceMethod(object_getClass(viewClass), Selector("new"), newBlockImp, "@@:")
